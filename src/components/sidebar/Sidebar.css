@@ -1,0 +1,38 @@
+.sidebar {
+  width: 290px;
+  height: 100vh;
+  background-color: #1C2434;
+  color: white;
+}
+
+.sidebar h2 {
+  font-size: 30px;
+  margin-left: 20px;
+  margin-top: 22px;
+}
+
+.elements {
+  margin: 80px 0;
+  margin-left: 40px;
+}
+
+.elements h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: #DEE4EE;
+}
+
+.elements ul {
+  padding-left: 0;
+}
+
+.elements ul li {
+  display: flex;
+  align-items: center;
+}
+
+.icons {
+  width: 18px;
+  padding-right: 10px;
+  color: #1C2434;
+}
