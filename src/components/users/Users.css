@@ -1,0 +1,132 @@
+/* DashboardUsers.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 50px;
+    font-size: 21px;
+}
+
+.header p:first-child {
+    font-weight: 600;
+}
+
+.body {
+    background-color: white;
+    margin: 0 50px;
+    padding: 20px 30px;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* padding-top: 15px; */
+}
+
+#dropdown {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333333;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#dropdown:hover {
+    border-color: #007bff;
+}
+
+#dropdown:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+}
+
+/* Selected option text */
+.selected-text {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555555;
+    font-style: italic;
+}
+
+.input-container {
+    width: 80%;
+}
+
+.search {
+    width: 100%;
+    padding: 8px 0;
+    padding-left: 10px;
+    font-size: 13px;
+}
+
+.search:hover {
+    border-color: #007bff;
+}
+
+.search:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+}
+
+.titles-container {
+    display: flex;
+    background-color: rgb(239, 239, 239);
+    justify-content: space-between;
+    padding: 0 25px;
+    margin-top: 30px;
+    color: #636161;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.ron-container {
+    padding: 0 25px;
+
+}
+
+.rows {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    font-weight: 500;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border-bottom: 3px solid #ccc8c8;
+    border-radius: 15px;
+
+}
+
+.column {
+    width: 25%;
+    text-align: center;
+}
+
+.column-first {
+    display: flex;
+    /* text-align: left; */
+}
+
+.username_container {
+    display: flex;
+    /* justify-content: center; */
+    /* margin-left: 10px; */
+}
+
+.user_picture {
+    width: 50px;
+    margin-right: 10px;
+    border: 1px solid brown;
+    border-radius: 50%;
+}
+
+.user_age {
+    color: #25B4F0;
+}
+
+.username {
+    display: inline-block;
+}
+

@@ -1,7 +1,27 @@
 /* ProfileCard.css */
+.card_container {
+    width: 100%;
+}
+
+.title_containner {
+
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+    padding-left: 74px;
+}
+
+.profile_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .profile-card {
-    width: 80%;
-    margin: 100px 50px 0 100px;
+    width: 88%;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

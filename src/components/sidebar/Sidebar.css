@@ -29,10 +29,29 @@
 .elements ul li {
   display: flex;
   align-items: center;
+  /* margin-bottom: 15px; Space between menu items */
 }
 
+/* Styling for the links inside the sidebar */
+.elements ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Remove underline */
+  color: white; /* Set text color to white */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+  padding: 0 12px;
+  border-radius: 5px; /* Rounded corners for hover effect */
+  width: 100%;
+}
+
+.elements ul li a:hover {
+  background-color: #2C3548; /* Slightly lighter background on hover */
+  color: #DEE4EE; /* Text color on hover */
+}
+
+/* Styling for icons */
 .icons {
   width: 18px;
   padding-right: 10px;
-  color: #1C2434;
+  color: white; /* Ensure icon color matches text */
 }
