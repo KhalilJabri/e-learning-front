@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Profile.css"
-// import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Profile() {
   return (
@@ -11,9 +11,12 @@ function Profile() {
       <div className='profile_container'>
         <div className="profile-card">
           <div className="header-background">
+            <Link to="/dashboard/editprofile" >
+              
             <button className="edit-btn">
               <i className="fas fa-camera"></i> Edit
             </button>
+            </Link>
             {/* <img className='header-background-img' src="https://timelinecovers.pro/facebook-cover/download/cool-facebook-cover.jpg" /> */}
           </div>
           <div className="profile-pic">
