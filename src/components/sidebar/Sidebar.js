@@ -47,7 +47,7 @@ const Sidebar = () => {
             </Link>
           </li> */}
           <li>
-            <Link to="/dashboard/demande" >
+            <Link to="/dashboard/demand" >
               <img className='icons' src={list} alt='dashboard' />
               <p>demandes</p>
             </Link>

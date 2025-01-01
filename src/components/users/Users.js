@@ -11,19 +11,21 @@ function Users() {
     const handleChange = (event) => {
         setSelectedOption(event.target.value);
         if (event.target.value === 'all') {
-            setUserList(userList);
+            setUserList(userList.filter(user => user.name.toUpperCase().includes(search.toUpperCase())));
         }
         else if (event.target.value === 'student') {
-            setUserList(userList.filter(user => user.role.toUpperCase() === 'Student'.toUpperCase()));
+            setUserList(userList.filter(user => user.role.toUpperCase() === 'student'.toUpperCase() && 
+                                                user.name.toUpperCase().includes(search.toUpperCase())));
         }
         else if (event.target.value === 'teacher') {
-            setUserList(userList.filter(user => user.role.toUpperCase() === 'Teacher'.toUpperCase()));
+            setUserList(userList.filter(user => user.role.toUpperCase() === 'teacher'.toUpperCase()&& 
+                                                user.name.toUpperCase().includes(search.toUpperCase())));
         }
     };
 
     const searchHandler = (event) => {
         setSearch(event.target.value);
-        if (event.target.value === '') {
+        if (event.target.value !== '') {
             setUserList(userList.filter(user => user.username.toUpperCase().includes(search.toUpperCase())));
         }
     }
@@ -31,7 +33,7 @@ function Users() {
 
     return (
         <div className="dashboard-container">
-            <div className='header'>
+            <div className='headerTitle'>
                 <p>Users</p>
                 <p>Dashboard/ Users</p>
             </div>
@@ -50,6 +52,9 @@ function Users() {
                             className='search'
                             onChange={searchHandler}
                         />
+                    </div>
+                    <div className=''>
+                        <button className="button_add_user">Add User</button>
                     </div>
                 </div>
 
