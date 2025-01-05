@@ -1,8 +1,44 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import "./Profile.css"
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import host from '../../hosts/Host';
 
 function Profile() {
+  const [user, setUser] = useState("");
+  const [error, setError] = useState("");
+
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const url = `/auth/viewProfil/${localStorage.getItem("userId")}`;
+      const fullUrl = `${host}${url}`;
+      try {
+        const response = await axios.get(fullUrl, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
+        });
+
+        console.log("++++++++++++++++"+localStorage.getItem("token"));
+
+        if (response.status === 200) {
+          setUser(response.data);
+
+        } else {
+          setError(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching users:");
+        setError("Something went wrong. Please try again.");
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
   return (
     <div className='card_container'>
       <diV className="title_container">
@@ -12,10 +48,10 @@ function Profile() {
         <div className="profile-card">
           <div className="header-background">
             <Link to="/dashboard/editprofile" >
-              
-            <button className="edit-btn">
-              <i className="fas fa-camera"></i> Edit
-            </button>
+
+              <button className="edit-btn">
+                <i className="fas fa-camera"></i> Edit
+              </button>
             </Link>
             {/* <img className='header-background-img' src="https://timelinecovers.pro/facebook-cover/download/cool-facebook-cover.jpg" /> */}
           </div>
@@ -29,8 +65,8 @@ function Profile() {
             </div>
           </div>
           <div className="profile-info">
-            <h2>Danish Helium</h2>
-            <p>UI/UX Designer</p>
+            <h2>{user.firstName} {user.lastName}</h2>
+            <p>{user.role}</p>
             {/* <div className="stats">
           <div>
             <strong>259</strong>
@@ -47,10 +83,7 @@ function Profile() {
         </div> */}
             <div className="about">
               <h3>About Me</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                posuere fermentum urna, eu condimentum mauris tempus ut.
-              </p>
+              <p>{user.email} : {user.active ? "active" : "inactive"}</p>
             </div>
           </div>
         </div>

@@ -93,7 +93,7 @@
     width: 100%;
     border: none;
     background-color: rgb(162, 104, 255);
-    height: 30px;
+    /* height: 30px; */
     color: white;
     font-size: .8em;
     font-weight: 500;

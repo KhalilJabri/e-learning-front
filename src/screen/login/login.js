@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-// import styled from "styled-components";
 import './Login.css';
-
+import axios from "axios";
+import host from "../../hosts/Host";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const emailInputHandler = (data) => {
         setEmail(data.target.value);
@@ -13,14 +16,52 @@ const Login = () => {
 
     const passwordInputHandler = (data) => {
         setPass(data.target.value);
-        console.log();
     }
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+    
+        try {
+          // Make the login request
+          const url = "/auth/login";
+          const fullUrl = `${host}${url}`;
 
+          const response = await axios.post(fullUrl, 
+            {
+              username: email,
+              password: pass, // This is a bad practice. Use bcrypt to hash the password on the server
+            },
+            {
+              withCredentials: true, // for cookies or sessions
+              headers: {
+                  "Content-Type": "application/json",
+              },
+            });
+
+          if (response.status === 200) {
+            // Save token or user data if needed
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("userId", response.data.userId);
+            localStorage.setItem("username", response.data.username);
+            
+            console.log(response.data);
+            
+            // Navigate to the dashboard
+            navigate("/dashboard/rapport");
+          } else {
+            setError("Invalid login credentials.");
+          }
+
+        } catch (error) {
+          console.error("Login error: ", error);
+          setError("Something went wrong. Please try again.");
+        }
+      };
+    
 
     return (
         <div className="login_container">
-            <form action="" className="form_main">
+            <form onSubmit={handleLogin} className="form_main">
                 <p className="heading">Login</p>
                 <div className="inputContainer">
                     <svg
@@ -64,8 +105,9 @@ const Login = () => {
                         placeholder="Password"
                     />
                 </div>
+                {error && <p style={{ color: "red", zIndex: 2}}>{error}</p>}
 
-                <button id="button">Submit</button>
+                <button type="submit" id="button">Submit</button>
                 {/* <a className="forgotLink" href="#">
                     Forgot your password?
                 </a> */}

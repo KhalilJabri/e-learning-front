@@ -1,7 +1,14 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./Header.css";
 
 function Header() {
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+
+    setUser(localStorage.getItem("username"));
+  }, []);
+
   return (
     <header className="header-container">
       {/* Logo */}
@@ -30,7 +37,7 @@ function Header() {
             className="profile-pic"
           />
         </div> */}
-          <p >salah</p>
+          <p >{ localStorage.getItem("username") }</p>
       </div>
     </header>
   );
