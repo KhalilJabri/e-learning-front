@@ -173,3 +173,157 @@
 .username {
     display: inline-block;
 }
+
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Darker overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* Subtle blur for the background */
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal Container */
+.modal {
+    background: linear-gradient(135deg, #ffffff, #f7f9fc);
+    border-radius: 15px;
+    width: 450px;
+    padding: 25px;
+    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.25); /* Modern shadow */
+    animation: scaleIn 0.4s ease-in-out;
+    position: relative;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg);
+    background: #d84330;
+}
+
+/* Modal Header */
+.modal h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 90%;
+    padding: 12px 15px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f1f3f8;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+/* Gradient Buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-submit {
+    background: linear-gradient(90deg, #4caf50, #81c784);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.btn-cancel {
+    background: linear-gradient(90deg, #f44336, #e57373);
+}
+
+.btn-cancel:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}

@@ -13,7 +13,7 @@ const TopNav = () => {
                 <div className="profile">
                     <Link to="/dashboard/profile" className='profile_text'>
                         <span className='name' style={{}}>{localStorage.getItem("username")}</span>
-                        <span className='role'>Admin</span>
+                        <span className='role'>{localStorage.getItem("role").toLowerCase()}</span>
                     </Link>
                     <img className='img_profile' src={spider} alt="Logo" />
                 </div>

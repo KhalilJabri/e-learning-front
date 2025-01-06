@@ -114,6 +114,9 @@ const radarData = {
    ],
 };
 
+// console.log("--------------" + localStorage.getItem("token"));
+
+
 const Rapport = () => {
    return (
       <div>

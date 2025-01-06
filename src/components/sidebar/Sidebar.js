@@ -12,15 +12,17 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <h2>CRTek-up</h2>
+      <h2>CRTek-Up</h2>
       <div className='elements'>
         <h3>Menu</h3>
         <ul>
           <li>
-            <Link to="/dashboard/rapport" >
-              <img className='icons' src={dasboard} alt='dashboard' />
-              <p>Rapports</p>
-            </Link>
+            {localStorage.getItem("role").toUpperCase() === 'ADMIN' ? (
+              <Link to="/dashboard/rapport" >
+                <img className='icons' src={dasboard} alt='dashboard' />
+                <p>Rapports</p>
+              </Link>
+            ) : (<></>)}
           </li>
           <li>
             <Link to="/dashboard/course">
@@ -29,28 +31,29 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/dashboard/calendar">
-              <img className='icons' src={calender} alt='calender' />
-              <p>Calendar</p>
-            </Link>
+            {localStorage.getItem("role").toUpperCase() === 'ADMIN' ? (
+              <Link to="/dashboard/calendar">
+                <img className='icons' src={calender} alt='calender' />
+                <p>Calendar</p>
+              </Link>
+            ) : (<></>)}
           </li>
           <li>
-            <Link to="/dashboard/users">
-              <img className='icons' src={teacher} alt='teacher' />
-              <p>Users</p>
-            </Link>
+            {localStorage.getItem("role").toUpperCase() === 'ADMIN' ? (
+              <Link to="/dashboard/users">
+                <img className='icons' src={teacher} alt='teacher' />
+                <p>Users</p>
+              </Link>
+            ) : (<></>)}
           </li>
-          {/* <li>
-            <Link to="/dashboard/etudiant">
-              <img className='icons' src={graduated} alt='graduated' />
-              <p>Etudiant</p>
-            </Link>
-          </li> */}
           <li>
-            <Link to="/dashboard/demand" >
-              <img className='icons' src={list} alt='dashboard' />
-              <p>demandes</p>
-            </Link>
+            {localStorage.getItem("role").toUpperCase() === 'ADMIN' ? (
+              <Link to="/dashboard/demand" >
+                <img className='icons' src={list} alt='dashboard' />
+                <p>demandes</p>
+              </Link>
+            ) : (<></>)}
+
           </li>
         </ul>
       </div>

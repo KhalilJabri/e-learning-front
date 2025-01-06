@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./EditProfile.css";
-import spider from '../../assets/spider.jpg';
 import axios from "axios";
 import host from "../../hosts/Host";
 
@@ -8,7 +7,9 @@ function EditProfile() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    // const [user, setUser] = useState("");
     const [error, setError] = useState("");
+    const [message, setMessage] = useState("");
 
 
     useEffect(() => {
@@ -25,9 +26,11 @@ function EditProfile() {
                 });
 
                 if (response.status === 200) {
-                    setFirstName(response.data.user.firstName);
-                    setLastName(response.data.user.lastName);
-                    setEmail(response.data.user.email);
+                    setFirstName(response.data.firstName);
+                    setLastName(response.data.lastName);
+                    setEmail(response.data.email);
+
+                    console.log(response.data);
                 } else {
                     setError(response.data);
                 }
@@ -40,27 +43,36 @@ function EditProfile() {
         fetchUserProfile();
     }, []);
 
+    // Handle form submission for updating user data
     const handleUpdate = async (e) => {
         e.preventDefault();
         const url = `/auth/updateUser/${localStorage.getItem("userId")}`;
         const fullUrl = `${host}${url}`;
         try {
-            const response = await axios.patch(fullUrl, {
-                firstName: firstName,
-                lastName: lastName,
-                email: email
-            }, {
-                withCredentials: true,
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+            const response = await axios.patch(
+                fullUrl,
+                {
+                    firstName,
+                    lastName,
+                    email,
+                },
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
                 }
-            });
+            );
+
+            console.log(response);
             if (response.status === 200) {
-                console.log('User updated successfully');
-                setFirstName(response.data.user.firstName);
-                setLastName(response.data.user.lastName);
-                setEmail(response.data.user.email);
+                setMessage("User updated successfully.");
+                setFirstName(response.data.firstName);
+                setLastName(response.data.lastName);
+                setEmail(response.data.email);
+            } else {
+                setError(response.data.message || "Failed to update user.");
             }
         } catch (error) {
             console.error("Error updating user:", error);
@@ -75,14 +87,16 @@ function EditProfile() {
             {/* Personal Information Section */}
             <div className="personal-info">
                 <h2>Personal Information</h2>
+                {message && <p className="success-message">{message}</p>}
+                {error && <p className="error-message">{error}</p>}
                 <form onSubmit={handleUpdate} >
                     <div className="test">
-                        <FormInput label="First Name" placeholder={firstName} />
-                        <FormInput label="Last Name" placeholder={lastName} />
+                    <FormInput label="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                        <FormInput label="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
 
                     </div>
                     {/* <FormInput label="Phone Number" placeholder="+990 3343 7865" /> */}
-                    <FormInput label="email" placeholder={email} />
+                    <FormInput label="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     {/* <FormTextArea label="BIO" placeholder="Lorem ipsum dolor sit amet..." /> */}
                     <div className="form-buttons">
                         {/* <button type="button" className="cancel">Cancel</button> */}
@@ -91,25 +105,16 @@ function EditProfile() {
                 </form>
             </div>
 
-            {/* Your Photo Section */}
-
         </div>
     );
 }
 
 // Reusable Input Component
-const FormInput = ({ label, placeholder }) => (
+// Reusable Input Component
+const FormInput = ({ label, value, onChange }) => (
     <div className="form-group">
         <label>{label}</label>
-        <input type="text" placeholder={placeholder} />
-    </div>
-);
-
-// Reusable TextArea Component
-const FormTextArea = ({ label, placeholder }) => (
-    <div className="form-group">
-        <label>{label}</label>
-        <textarea placeholder={placeholder}></textarea>
+        <input type="text" value={value} onChange={onChange} />
     </div>
 );
 

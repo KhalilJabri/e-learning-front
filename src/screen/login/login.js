@@ -20,44 +20,53 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-    
+
         try {
-          // Make the login request
-          const url = "/auth/login";
-          const fullUrl = `${host}${url}`;
+            // Make the login request
+            const url = "/auth/login";
+            const fullUrl = `${host}${url}`;
 
-          const response = await axios.post(fullUrl, 
-            {
-              username: email,
-              password: pass, // This is a bad practice. Use bcrypt to hash the password on the server
-            },
-            {
-              withCredentials: true, // for cookies or sessions
-              headers: {
-                  "Content-Type": "application/json",
-              },
-            });
+            const response = await axios.post(fullUrl,
+                {
+                    username: email,
+                    password: pass, // This is a bad practice. Use bcrypt to hash the password on the server
+                },
+                // {
+                //     withCredentials: true, // for cookies or sessions
+                //     headers: {
+                //         "Content-Type": "application/json",
+                //     },
+                // }
+            );
 
-          if (response.status === 200) {
-            // Save token or user data if needed
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("userId", response.data.userId);
-            localStorage.setItem("username", response.data.username);
-            
-            console.log(response.data);
-            
-            // Navigate to the dashboard
-            navigate("/dashboard/rapport");
-          } else {
-            setError("Invalid login credentials.");
-          }
+            if (response.status === 200) {
+                // Save token or user data if needed
+
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("userId", response.data.userId);
+                localStorage.setItem("username", response.data.username);
+                localStorage.setItem("role", response.data.role);
+
+                console.log(response.data);
+
+                if (response.data.role.toUpperCase() === 'ADMIN' || response.data.role.toUpperCase() === 'ENSEIGNANT') {
+                    navigate("/dashboard/users");
+                } else if (response.data.role.toUpperCase() === 'ETUDIANT') {
+                    console.log("Student");
+                }
+
+                // Navigate to the dashboard
+                // navigate("/dashboard/rapport");
+            } else {
+                setError("Invalid login credentials.");
+            }
 
         } catch (error) {
-          console.error("Login error: ", error);
-          setError("Something went wrong. Please try again.");
+            console.error("Login error: ", error);
+            setError("Something went wrong. Please try again.");
         }
-      };
-    
+    };
+
 
     return (
         <div className="login_container">
@@ -105,7 +114,7 @@ const Login = () => {
                         placeholder="Password"
                     />
                 </div>
-                {error && <p style={{ color: "red", zIndex: 2}}>{error}</p>}
+                {error && <p style={{ color: "red", zIndex: 2 }}>{error}</p>}
 
                 <button type="submit" id="button">Submit</button>
                 {/* <a className="forgotLink" href="#">

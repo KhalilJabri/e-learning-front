@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Profile.css"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -9,32 +9,32 @@ function Profile() {
   const [error, setError] = useState("");
 
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      const url = `/auth/viewProfil/${localStorage.getItem("userId")}`;
-      const fullUrl = `${host}${url}`;
-      try {
-        const response = await axios.get(fullUrl, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-          }
-        });
-
-        console.log("++++++++++++++++"+localStorage.getItem("token"));
-
-        if (response.status === 200) {
-          setUser(response.data);
-
-        } else {
-          setError(response.data);
+  const fetchUserProfile = async () => {
+    const url = `/auth/viewProfil/${localStorage.getItem("userId")}`;
+    const fullUrl = `${host}${url}`;
+    try {
+      const response = await axios.get(fullUrl, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         }
-      } catch (error) {
-        console.error("Error fetching users:");
-        setError("Something went wrong. Please try again.");
+      });
+
+      console.log("kkkkkk " + response.data);
+
+      if (response.status === 200) {
+        setUser(response.data);
+
+      } else {
+        setError(response.data);
       }
-    };
+    } catch (error) {
+      // console.error("Error fetching users:");
+      setError("Something went wrong. Please try again.");
+    }
+  };
+  useEffect(() => {
 
     fetchUserProfile();
   }, []);
@@ -67,23 +67,9 @@ function Profile() {
           <div className="profile-info">
             <h2>{user.firstName} {user.lastName}</h2>
             <p>{user.role}</p>
-            {/* <div className="stats">
-          <div>
-            <strong>259</strong>
-            <span>Posts</span>
-          </div>
-          <div>
-            <strong>129K</strong>
-            <span>Followers</span>
-          </div>
-          <div>
-            <strong>2K</strong>
-            <span>Following</span>
-          </div>
-        </div> */}
             <div className="about">
               <h3>About Me</h3>
-              <p>{user.email} : {user.active ? "active" : "inactive"}</p>
+              <p>{user.email} : {user.isActive ? "active" : "inactive"}</p>
             </div>
           </div>
         </div>
