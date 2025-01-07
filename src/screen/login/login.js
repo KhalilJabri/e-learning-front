@@ -53,6 +53,9 @@ const Login = () => {
                     navigate("/dashboard/users");
                 } else if (response.data.role.toUpperCase() === 'ETUDIANT') {
                     console.log("Student");
+                    const studentData = { id: response.data.userId, role: response.data.role }; // Example data to pass
+                    const queryParams = new URLSearchParams(studentData).toString();
+                    window.location.href = `http://localhost:3001?${queryParams}`;
                 }
 
                 // Navigate to the dashboard
